@@ -1,0 +1,5 @@
+# dsh-web-notification bundle patch: mount the host plugin under its package
+# name, resolved through the profile's node_modules.
+- insert:
+    - id: dsh-web-notification
+      name: dsh-web-notification

@@ -1,0 +1,12 @@
+{
+  "name": "dsh-web-notification",
+  "description": "Browser system notifications for the DeepSeek Harness web GUI: turn completion and permission/approval asks.",
+  "version": "0.1.0",
+  "entry": {
+    "name": "dsh-web-notification",
+    "inject": []
+  },
+  "client": {
+    "platform": "web"
+  }
+}
