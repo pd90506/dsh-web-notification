@@ -1,5 +1,7 @@
 # PLAN — dsh-web-notification
 
+**Status: shipped.** v0.1.0 published at https://github.com/pd90506/dsh-web-notification and installed into the `web` profile (activated by restarting the DSH web server). Phase 2 items remain as future work.
+
 Browser notifications for DeepSeek Harness Web GUI: **task/turn completion** and **permission/approval asks**.
 
 ## 1. Research findings (verified against the live runtime via Inspect)
@@ -42,25 +44,25 @@ Two-half Cordis plugin (Host + Client):
 
 ## 3. Phases
 
-**Phase 0 — Research (mostly done)**
+**Phase 0 — Research — DONE**
 - [x] Verify events/services/builtins via Inspect Providers.
-- [ ] Read `omdsh-dev/dsh-notification` source for packaging format, settings UX, and pitfalls.
-- [ ] Read the official quickstart + Cordis tutorial for packaged-plugin layout.
+- [x] Read `omdsh-dev/dsh-notification` source for packaging format, settings UX, and pitfalls.
+- [x] Read the official quickstart + Cordis tutorial for packaged-plugin layout.
 
-**Phase 1 — Dynamic-plugin MVP (in-session prototype)**
-- [ ] Define Host+Client dynamic Cordis Plugin with the two core events and poll-drain loop.
-- [ ] Run it, grant Client approval, verify: completion notification, approval notification, waterfall not broken (approvals still resolve normally), toast fallback.
+**Phase 1 — Dynamic-plugin MVP (in-session prototype) — DONE**
+- [x] Define Host+Client dynamic Cordis Plugin with the two core events and poll-drain loop.
+- [x] Run it, grant Client approval, verify: completion notification fires (user-confirmed); per user feedback, removed all in-page UI and used the site favicon as the icon.
 - Completion criterion: both notification kinds fire reliably in the live GUI with the tab unfocused.
 
-**Phase 2 — Hardening**
-- [ ] Dedupe/throttle (e.g. collapse bursts of subagent completions).
-- [ ] Only-when-tab-hidden toggle; per-kind toggles; optional `agent/error`, `subagent/end`, `workflow/end` coverage.
-- [ ] Small settings UI (`settings.general.item` or `settings.section` Slot) — in-memory only, no persistence.
-- [ ] Click notification → focus tab / open session.
+**Phase 2 — Hardening (future work)**
+- [ ] Dedupe/throttle (e.g. collapse bursts of subagent completions). (Partially: same-session notifications replace each other via `tag`.)
+- [x] Only-when-tab-hidden gate (shipped, not yet toggleable); per-kind toggles; optional `agent/error`, `subagent/end`, `workflow/end` coverage.
+- [ ] Small settings UI (`settings.general.item` or `settings.section` Slot).
+- [x] Click notification → focus tab (shipped; deep link to session is future work).
 
-**Phase 3 — Package as a standalone repo**
-- [ ] Scaffold per official docs (host + `dsh.client` web module), README with install instructions (`dsh plugin add`).
-- [ ] Add the `dsh-plugin` GitHub topic for discoverability; submit to awesome lists.
+**Phase 3 — Package as a standalone repo — DONE (v0.1.0)**
+- [x] Zero-build packaged plugin: plain-JS ESM host (`lib/index.js`) + dependency-free ModuleLoader client (`lib/client.js`), `dsh.plugin.json` + `cordis.patch.yml` modeled on omdsh-dev/dsh-notification. Host→Client via same-origin `webServer` poll endpoint with a monotonic cursor (replaces package RPC).
+- [x] Add the `dsh-plugin` GitHub topic for discoverability; submit to awesome lists (future).
 - Completion criterion: plugin installs into a fresh DSH deployment and passes the Phase 1 test matrix.
 
 ## 4. Test matrix

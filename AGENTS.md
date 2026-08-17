@@ -8,6 +8,8 @@ Develop a DeepSeek Harness (DSH) plugin that fires web browser notifications whe
 
 Full plan: see `PLAN.md`.
 
+**Status: shipped.** v0.1.0 is published at https://github.com/pd90506/dsh-web-notification and installed into the user's `web` profile. The packaged plugin (`lib/index.js` host + `lib/client.js` client, zero build step) is the durable artifact; future work lives in PLAN.md Phase 2.
+
 ## References
 
 - Official repo: https://github.com/deepseek-ai/deepseek-harness
